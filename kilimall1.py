@@ -34,20 +34,15 @@ def scrape_kilimall(search_term, pages=1):
             )
             price = int(price.split()[0]) if price else 0
 
+            # Extract image URL
             img_tag = container.find("img")
             image = (
                 img_tag["data-src"]
                 if img_tag and img_tag.get("data-src")
                 else img_tag.get("src", "No Image")
             )
-            if image:
-                image = img_tag.get("src")
-                print("/n")
-                print(image)
-                print("/n")
-                image = (
-                base_url + image if image and not image.startswith("http") else image
-)
+            if image and not image.startswith("http"):
+                image = base_url + image
 
             # Extract product link
             link_tag = container.find("a", href=True)
@@ -81,6 +76,3 @@ def scrape_kilimall(search_term, pages=1):
         writer.writerows(products)
 
     print(f"\nData has been written to {filename}")
-
-
-

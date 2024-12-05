@@ -86,6 +86,7 @@ def search():
                 "Name": product_name,
                 "Price": product_details[0],
                 "Rating": product_details[1],
+                "link": product_details[1]
             }
             for product_name, product_details in jumia_prices.items()
             if price_min <= int(product_details[0]) <= price_max
@@ -96,6 +97,7 @@ def search():
                 "Name": product_name,
                 "Price": product_details[0],
                 "Rating": product_details[1],
+                "link": product_details[2]
             }
             for product_name, product_details in kilimall_prices.items()
             if price_min <= int(product_details[0]) <= price_max
