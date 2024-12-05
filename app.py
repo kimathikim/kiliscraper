@@ -18,6 +18,8 @@ def read_jumia_prices_from_csv(search_term):
                     jumia_prices[row["Name"]] = [
                         row["Price"],
                         row["Rating"],
+                        row["Image"],
+                        row["Link"]
                     ]
     except FileNotFoundError:
         logging.error(f"File {search_term}_jumia.csv not found.")
@@ -36,6 +38,8 @@ def read_kilimall_prices_from_csv(search_term):
                     kilimall_prices[row["Brand"]] = [
                         row["Price"],
                         row["Rating"],
+                        row["Image"],
+                        row["Link"]
                     ]
     except FileNotFoundError:
         logging.error(f"File {search_term}_kilimall.csv not found.")
@@ -86,7 +90,8 @@ def search():
                 "Name": product_name,
                 "Price": product_details[0],
                 "Rating": product_details[1],
-                "link": product_details[1]
+                "Image": product_details[2],
+                "Link": product_details[3]
             }
             for product_name, product_details in jumia_prices.items()
             if price_min <= int(product_details[0]) <= price_max
@@ -97,7 +102,8 @@ def search():
                 "Name": product_name,
                 "Price": product_details[0],
                 "Rating": product_details[1],
-                "link": product_details[2]
+                "Image": product_details[2],
+                "Link": product_details[3]
             }
             for product_name, product_details in kilimall_prices.items()
             if price_min <= int(product_details[0]) <= price_max
